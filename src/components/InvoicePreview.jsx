@@ -1,5 +1,5 @@
 import React from 'react';
-import { QRCodeSVG } from 'qrcode.react';
+import QRCode from "react-qr-code";
 import { generateZatcaBase64 } from '../utils/zatca';
 
 export default function InvoicePreview({
@@ -12,14 +12,6 @@ export default function InvoicePreview({
     sellerName,
     sellerVat
 }) {
-    const qrCodeValue = generateZatcaBase64(
-        sellerName,
-        sellerVat,
-        new Date().toISOString(), // Using current timestamp for generation or pass date if needed
-        total.toString(),
-        vat.toString()
-    );
-
     return (
         <div className="bg-white p-8 rounded-lg shadow-lg border border-slate-200 sticky top-6">
             <div className="flex justify-between items-start mb-8">
@@ -28,9 +20,8 @@ export default function InvoicePreview({
                     <p className="text-slate-500 text-sm mt-1">#INV-0001</p>
                 </div>
                 <div className="text-right">
-                    <h3 className="font-bold text-slate-800">{sellerName}</h3>
-                    <p className="text-sm text-slate-500">VAT: {sellerVat}</p>
-                    <p className="text-sm text-slate-500">Riyadh, Saudi Arabia</p>
+                    <h2 className="text-xl font-bold">{sellerName}</h2>
+                    <p className="text-sm text-gray-500">VAT: {sellerVat}</p>
                 </div>
             </div>
 
@@ -85,7 +76,20 @@ export default function InvoicePreview({
             </div>
 
             <div className="flex justify-center pt-4">
-                <QRCodeSVG value={qrCodeValue} size={128} className="p-2 bg-white border border-slate-100 rounded-lg shadow-sm" />
+                <div className="h-auto max-w-[150px] mx-auto">
+                    <QRCode
+                        size={256}
+                        style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                        value={generateZatcaBase64(
+                            sellerName,
+                            sellerVat,
+                            new Date().toISOString(),
+                            total.toFixed(2),
+                            vat.toFixed(2)
+                        )}
+                        viewBox={`0 0 256 256`}
+                    />
+                </div>
             </div>
             <p className="text-center text-xs text-slate-400 mt-4">
                 Scan to verify with ZATCA App

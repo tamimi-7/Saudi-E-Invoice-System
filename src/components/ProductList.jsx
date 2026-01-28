@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 
-export default function ProductList({ items, onAddItem, onRemoveItem }) {
+export default function ProductList({ items, onAddItem, onRemoveItem, onUpdateItem }) {
     const [newItem, setNewItem] = useState({ name: '', price: '', qty: '' });
 
     const handleAdd = () => {
@@ -26,6 +26,7 @@ export default function ProductList({ items, onAddItem, onRemoveItem }) {
                             <th className="px-4 py-3 text-left text-sm font-semibold text-slate-600">Product Name</th>
                             <th className="px-4 py-3 text-right text-sm font-semibold text-slate-600">Price (SAR)</th>
                             <th className="px-4 py-3 text-right text-sm font-semibold text-slate-600">Qty</th>
+                            <th className="px-4 py-3 text-center text-sm font-semibold text-slate-600">Tax Type</th>
                             <th className="px-4 py-3 text-right text-sm font-semibold text-slate-600">Total</th>
                             <th className="px-4 py-3 text-center text-sm font-semibold text-slate-600">Action</th>
                         </tr>
@@ -36,6 +37,17 @@ export default function ProductList({ items, onAddItem, onRemoveItem }) {
                                 <td className="px-4 py-3 text-slate-800">{item.name}</td>
                                 <td className="px-4 py-3 text-right text-slate-600">{item.price.toFixed(2)}</td>
                                 <td className="px-4 py-3 text-right text-slate-600">{item.qty}</td>
+                                <td className="px-4 py-3 text-center">
+                                    <select
+                                        value={item.taxType}
+                                        onChange={(e) => onUpdateItem(item.id, 'taxType', e.target.value)}
+                                        className="border p-1 rounded text-sm text-slate-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                    >
+                                        <option value="15">15%</option>
+                                        <option value="0">0%</option>
+                                        <option value="exempt">Exempt</option>
+                                    </select>
+                                </td>
                                 <td className="px-4 py-3 text-right font-medium text-slate-800">
                                     {/* Placeholder for line total, calculating strictly for display here not logic */}
                                     {(item.price * item.qty).toFixed(2)}
@@ -52,7 +64,7 @@ export default function ProductList({ items, onAddItem, onRemoveItem }) {
                         ))}
                         {items.length === 0 && (
                             <tr>
-                                <td colSpan="5" className="px-4 py-8 text-center text-slate-400 italic">
+                                <td colSpan="6" className="px-4 py-8 text-center text-slate-400 italic">
                                     No items added yet.
                                 </td>
                             </tr>
