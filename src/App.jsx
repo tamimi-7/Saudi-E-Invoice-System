@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import QRCode from "react-qr-code";
 import { generateZatcaBase64 } from './utils/zatca';
 import { Trash2, Plus } from 'lucide-react';
+import InvoiceForm from './components/InvoiceForm';
+import ProductList from './components/ProductList';
+import InvoicePreview from './components/InvoicePreview';
 
 
 function App() {
