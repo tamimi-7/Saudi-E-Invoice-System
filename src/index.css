@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+@media print {
+
+  /* نخفي كل شي في الصفحة */
+  body * {
+    visibility: hidden;
+  }
+
+  /* نظهر فقط ورقة الفاتورة */
+  .invoice-preview,
+  .invoice-preview * {
+    visibility: visible;
+  }
+
+  /* نوزن مكان الفاتورة في الورقة */
+  .invoice-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+    /* عشان الظل ما يطلع في الطباعة */
+    border: none;
+  }
+
+  /* نخفي زر الطباعة نفسه */
+  button {
+    display: none !important;
+  }
+}
+
 @layer base {
   body {
     @apply bg-slate-50 text-slate-900;

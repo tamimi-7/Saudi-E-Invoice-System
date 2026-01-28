@@ -13,68 +13,74 @@ export default function InvoicePreview({
     sellerVat
 }) {
     return (
-        <div className="bg-white p-8 rounded-lg shadow-lg border border-slate-200 sticky top-6">
-            <div className="flex justify-between items-start mb-8">
+        <div className="invoice-preview bg-white p-8 rounded shadow-lg border print:border-none print:shadow-none max-w-[210mm] mx-auto min-h-[297mm]">
+
+            {/* رأس الفاتورة */}
+            <div className="flex justify-between items-start mb-8 border-b pb-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-900 uppercase tracking-wide">Tax Invoice</h1>
-                    <p className="text-slate-500 text-sm mt-1">#INV-0001</p>
+                    <h2 className="text-2xl font-bold text-gray-800">فاتورة ضريبية</h2>
+                    <p className="text-sm text-gray-500">#{'INV-001'}</p>
                 </div>
-                <div className="text-right">
-                    <h2 className="text-xl font-bold">{sellerName}</h2>
-                    <p className="text-sm text-gray-500">VAT: {sellerVat}</p>
+                <div className="text-left">
+                    <h3 className="font-bold text-lg text-gray-800">{sellerName || 'اسم المنشأة'}</h3>
+                    <p className="text-gray-600 text-sm">الرقم الضريبي: {sellerVat || '3000...'}</p>
+                    <p className="text-gray-600 text-sm">الرياض، المملكة العربية السعودية</p>
                 </div>
             </div>
 
-            <div className="border-t border-b border-slate-100 py-4 mb-6 grid grid-cols-2 gap-4">
+            {/* معلومات العميل والتاريخ */}
+            <div className="flex justify-between mb-8">
                 <div>
-                    <p className="text-xs font-semibold text-slate-400 uppercase">Bill To</p>
-                    <p className="text-slate-800 font-medium mt-1">{customerName || 'walk-in customer'}</p>
+                    <p className="text-gray-500 text-xs uppercase mb-1">العميل</p>
+                    <h4 className="font-bold text-gray-800">{customerName || 'عميل نقدي'}</h4>
                 </div>
-                <div className="text-right">
-                    <p className="text-xs font-semibold text-slate-400 uppercase">Date</p>
-                    <p className="text-slate-800 font-medium mt-1">{date || new Date().toLocaleDateString()}</p>
+                <div className="text-left">
+                    <p className="text-gray-500 text-xs uppercase mb-1">التاريخ</p>
+                    <p className="font-bold text-gray-800">{date || new Date().toLocaleDateString('en-CA')}</p>
                 </div>
             </div>
 
-            <div className="mb-8">
-                <table className="w-full">
-                    <thead>
-                        <tr className="border-b-2 border-slate-100">
-                            <th className="py-2 text-left text-xs font-semibold text-slate-500 uppercase">Item</th>
-                            <th className="py-2 text-right text-xs font-semibold text-slate-500 uppercase">Qty</th>
-                            <th className="py-2 text-right text-xs font-semibold text-slate-500 uppercase">Total</th>
+            {/* جدول الفاتورة */}
+            <table className="w-full mb-8">
+                <thead>
+                    <tr className="border-b-2 border-gray-200">
+                        <th className="text-right py-2 text-sm font-bold text-gray-600">المنتج</th>
+                        <th className="text-center py-2 text-sm font-bold text-gray-600">الكمية</th>
+                        <th className="text-left py-2 text-sm font-bold text-gray-600">الإجمالي</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {items.map((item, idx) => (
+                        <tr key={idx} className="border-b border-gray-100">
+                            <td className="py-3 text-gray-800">{item.name}</td>
+                            <td className="py-3 text-center text-gray-600">{item.qty}</td>
+                            <td className="py-3 text-left text-gray-800">
+                                {(item.price * item.qty).toFixed(2)} ر.س
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-50">
-                        {items.map((item, idx) => (
-                            <tr key={idx}>
-                                <td className="py-3 text-sm text-slate-700">{item.name}</td>
-                                <td className="py-3 text-right text-sm text-slate-700">{item.qty}</td>
-                                <td className="py-3 text-right text-sm text-slate-900 font-medium">
-                                    {/* Display logic only */}
-                                    {(item.price * item.qty).toFixed(2)}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                    ))}
+                </tbody>
+            </table>
 
-            <div className="bg-slate-50 p-6 rounded-lg mb-6">
-                <div className="flex justify-between mb-2">
-                    <span className="text-slate-600 text-sm">Subtotal</span>
-                    <span className="text-slate-900 font-medium">{subtotal.toFixed(2)} SAR</span>
-                </div>
-                <div className="flex justify-between mb-4">
-                    <span className="text-slate-600 text-sm">VAT (15%)</span>
-                    <span className="text-slate-900 font-medium">{vat.toFixed(2)} SAR</span>
-                </div>
-                <div className="flex justify-between pt-4 border-t border-slate-200">
-                    <span className="text-lg font-bold text-slate-900">Total</span>
-                    <span className="text-lg font-bold text-blue-600">{total.toFixed(2)} SAR</span>
+            {/* الإجماليات */}
+            <div className="flex justify-end mb-8">
+                <div className="w-1/2">
+                    <div className="flex justify-between py-2 border-b">
+                        <span className="text-gray-600">المجموع (قبل الضريبة)</span>
+                        <span className="font-medium">{subtotal.toFixed(2)} ر.س</span>
+                    </div>
+                    <div className="flex justify-between py-2 border-b">
+                        <span className="text-gray-600">ضريبة القيمة المضافة (15%)</span>
+                        <span className="font-medium">{vat.toFixed(2)} ر.س</span>
+                    </div>
+                    <div className="flex justify-between py-2 text-lg font-bold text-blue-600">
+                        <span>الإجمالي المستحق</span>
+                        <span>{total.toFixed(2)} ر.س</span>
+                    </div>
                 </div>
             </div>
 
+            {/* ZATCA QR Code */}
             <div className="flex justify-center pt-4">
                 <div className="h-auto max-w-[150px] mx-auto">
                     <QRCode
@@ -92,8 +98,15 @@ export default function InvoicePreview({
                 </div>
             </div>
             <p className="text-center text-xs text-slate-400 mt-4">
-                Scan to verify with ZATCA App
+                امسح الكود عبر تطبيق الزكاة للتأكد
             </p>
+
+            <button
+                onClick={() => window.print()}
+                className="mt-6 w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 print:hidden transition-colors flex items-center justify-center gap-2"
+            >
+                🖨️ طباعة الفاتورة / حفظ PDF
+            </button>
         </div>
     );
 }

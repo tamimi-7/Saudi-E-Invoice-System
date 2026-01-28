@@ -61,11 +61,11 @@ function App() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-100 py-10 px-4 md:px-8">
+        <div className="min-h-screen bg-slate-100 py-10 px-4 md:px-8" dir="rtl">
             <div className="max-w-7xl mx-auto">
-                <header className="mb-10 text-center">
-                    <h1 className="text-3xl font-bold text-slate-800">Saudi E-Invoicing System</h1>
-                    <p className="text-slate-500 mt-2">ZATCA Phase 1 Compliant Invoice Generator</p>
+                <header className="mb-8 text-center">
+                    <h1 className="text-3xl font-bold text-gray-800">نظام الفوترة الإلكترونية السعودي</h1>
+                    <p className="text-gray-600 mt-2">إصدار الفواتير الضريبية المعتمدة</p>
                 </header>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">

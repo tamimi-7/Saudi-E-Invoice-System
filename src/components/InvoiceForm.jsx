@@ -1,36 +1,29 @@
 import React from 'react';
 import { Calendar } from 'lucide-react';
 
-export default function InvoiceForm({ customerName, setCustomerName, date, setDate }) {
+export default function InvoiceForm({ customerName, setCustomerName, date: invoiceDate, setDate: setInvoiceDate }) {
     return (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200 mb-6">
-            <h2 className="text-xl font-semibold text-slate-800 mb-4">Invoice Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white p-4 rounded shadow mb-6">
+            <h3 className="font-bold mb-4 text-gray-700">تفاصيل الفاتورة</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-slate-600 mb-2">
-                        Customer Name
-                    </label>
+                    <label className="block text-sm text-gray-600 mb-1">اسم العميل</label>
                     <input
                         type="text"
+                        placeholder="أدخل اسم العميل"
+                        className="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
-                        placeholder="Enter customer name"
-                        className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-slate-600 mb-2">
-                        Invoice Date
-                    </label>
-                    <div className="relative">
-                        <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
-                        <input
-                            type="date"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                        />
-                    </div>
+                    <label className="block text-sm text-gray-600 mb-1">تاريخ الإصدار</label>
+                    <input
+                        type="date"
+                        className="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        value={invoiceDate}
+                        onChange={(e) => setInvoiceDate(e.target.value)}
+                    />
                 </div>
             </div>
         </div>
