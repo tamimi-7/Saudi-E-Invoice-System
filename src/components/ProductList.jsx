@@ -50,12 +50,12 @@ export default function ProductList({ items, onAddItem, onRemoveItem, onUpdateIt
                             <td className="p-2">
                                 <input
                                     type="number"
-                                    min="0"
-                                    step="0.01"
+                                    min="1"
+                                    step="1"
                                     value={item.qty}
                                     onChange={(e) => {
-                                        const val = parseFloat(e.target.value);
-                                        onUpdateItem(item.id, 'qty', val < 0 ? 0 : val);
+                                        const val = parseInt(e.target.value, 10);
+                                        onUpdateItem(item.id, 'qty', isNaN(val) || val < 1 ? 1 : val);
                                     }}
                                     className="w-16 border p-1 rounded"
                                 />
@@ -113,13 +113,13 @@ export default function ProductList({ items, onAddItem, onRemoveItem, onUpdateIt
                     <input
                         type="number"
                         min="1"
-                        step="0.01"
+                        step="1"
                         placeholder="الكمية"
                         className="border p-2 rounded w-20"
                         value={newItem.qty}
                         onChange={(e) => {
-                            const val = parseFloat(e.target.value);
-                            setNewItem({ ...newItem, qty: val < 1 ? 1 : val });
+                            const val = parseInt(e.target.value, 10);
+                            setNewItem({ ...newItem, qty: isNaN(val) || val < 1 ? 1 : val });
                         }}
                     />
                     <button

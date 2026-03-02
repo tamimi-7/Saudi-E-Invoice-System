@@ -16,15 +16,27 @@
   }
 
   /* نوزن مكان الفاتورة في الورقة */
+  @page {
+    margin: 0;
+    size: auto;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+  }
+
   .invoice-preview {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     margin: 0;
+    padding: 20mm; /* Add some padding inside the invoice to avoid edge clipping */
     box-shadow: none;
-    /* عشان الظل ما يطلع في الطباعة */
     border: none;
+    page-break-inside: avoid;
   }
 
   /* نخفي زر الطباعة نفسه */
