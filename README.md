@@ -19,9 +19,3 @@
 * React.js (Vite)
 * Tailwind CSS
 * خوارزمية مخصصة لتشفير الـ QR Code (TLV Base64).
-
-## 🚀 كيف تشغل المشروع بجهازك؟
-
-1. انسخ المستودع (Clone):
-   ```bash
-   git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
