@@ -1,21 +1,21 @@
-# مشروع الفاتورة الإلكترونية السعودية (ZATCA) 🇸🇦
+# Invoice — ZATCA Phase 1 Tax Invoice Tool 🇸🇦
 
-سويت هذا المشروع كأداة بسيطة ومفتوحة المصدر عشان أسهل عملية إصدار وطباعة الفواتير الضريبية (المبسطة والقياسية) حسب متطلبات **المرحلة الأولى** لهيئة الزكاة والضريبة والجمارك (ZATCA). 
+A lightweight, open-source tool for generating and printing
+tax invoices compliant with ZATCA Phase 1 requirements.
 
-المشروع مبني باستخدام React و Tailwind CSS، ومصمم عشان يكون سريع وجاهز للاستخدام المباشر.
+## Features
+- Supports B2C and B2B invoice types
+- QR Code with TLV Base64 encoding — scannable via the
+  official ZATCA app
+- Auto-calculates 15% VAT and totals per line item
+- Print-ready layout (clean PDF export, no buttons/menus)
+- Auto-incremented invoice numbering
 
-## ⚠️ تنبيه مهم (إخلاء مسؤولية)
-هذا المشروع يغطي **المرحلة الأولى فقط** (الإصدار والطباعة). 
-النظام حالياً **لا يقوم** بتوليد ملفات `XML UBL 2.1`، ولا يربط مع سيرفرات الهيئة (المرحلة الثانية). استخدامك لهذا الكود في بيئة عمل حقيقية يقع على مسؤوليتك الشخصية، وتأكد دائماً من مراجعته مع محاسبك القانوني.
+## Tech Stack
+React.js (Vite) — Tailwind CSS — Custom TLV Base64 encoder
 
-## ✨ إيش يقدم هذا المشروع؟
-* **نوعين من الفواتير:** تقدر تبدل بين فاتورة أفراد (B2C) وفاتورة شركات (B2B).
-* **QR Code نظامي:** يولد الباركود بتشفير `Base64 TLV` المطلوب من الهيئة، وتقدر تمسحه بتطبيق ZATCA الرسمي ويقراه بدون مشاكل.
-* **حسابات تلقائية:** يحسب لك مبلغ الضريبة (15%) والإجمالي لكل صنف وللفاتورة كاملة.
-* **جاهز للطباعة:** مرتب بـ CSS عشان لما تضغط طباعة (أو حفظ كـ PDF) تطلع لك الفاتورة في صفحة واحدة نظيفة، وبدون ما تنطبع الأزرار والقوائم.
-* **ترقيم تسلسلي:** الفواتير تترقم تلقائياً عشان ما يصير فيه تكرار.
-
-## 🛠️ التقنيات اللي استخدمتها
-* React.js (Vite)
-* Tailwind CSS
-* خوارزمية مخصصة لتشفير الـ QR Code (TLV Base64).
+## ⚠️ Disclaimer
+This tool covers Phase 1 only (generation & printing).
+It does not produce XML UBL 2.1 files or integrate with
+ZATCA servers (Phase 2). Use in production at your own risk
+and always consult your accountant.
